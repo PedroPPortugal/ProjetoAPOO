@@ -1,21 +1,51 @@
-public static void apresentarListaUtentes(List<Emprestimo> emprestimos,List<Reserva> reservas)
-        /** List<Emprestimo> emprestimos: recebe uma lista de objetos do tipo Emprestimo.
-        * List<Reserva> reservas: recebe uma lista de objetos do tipo Reserva */
+public static void apresentarListaDeUtentes(List<Emprestimo> emprestimos, List<Reserva> reservas)
         {
-            Set<Utente> utentes = new HashSet<>()
-        /** Set nao permite duplicados, HashSet organiza de forma eficiente para nao haver duplicados */
+        List<Utente> utentes = new ArrayList<>();
 
-        emprestimos.forEach(e -> utentes.add(e.getUtente()));
-        /** forEach executa a acao para cada elemento da lista
-         * e representa o emprestimo atual durante a repeticao
-         * e.getUtente(): Chama o método getUtente do objeto Emprestimo, que retorna o utente associado ao mesmo
-         * utentes.add(...): Adiciona o utente ao conjunto */
+        for (Emprestimo e : emprestimos)
+        {
+        Utente utente = e.getUtente();
+        boolean jaAdicionado = false;
 
-        reservas.forEach(r -> utentes.add(r.getUtente()));
-        /** parecida com a linha anterior mas trabalha na lista de reservas
-         * r representa a reserva atual durante a repeticao */
+        /** Verificamos se o utente já está na lista*/
+        for (int i = 0; i < utentes.size(); i++)
+        {
+        if (utentes.get(i).equals(utente))
+        {
+        jaAdicionado = true;
+        break;
+        }
+        }
+
+        if (!jaAdicionado)
+        {
+        utentes.add(utente);
+        }
+        }
+
+        /** Percorremos a lista de reservas e adicionamos os utentes à lista, caso não estejam lá*/
+
+        for (Reserva r : reservas)
+        {
+        Utente utente = r.getUtente();
+        boolean jaAdicionado = false;
+
+        for (int i = 0; i < utentes.size(); i++)
+        {
+        if (utentes.get(i).equals(utente))
+            {
+        jaAdicionado = true;
+        break;
+            }
+        }
+
+        if (!jaAdicionado) {
+        utentes.add(utente);
+        }
+        }
 
         System.out.println("Lista de utentes da biblioteca:");
-        utentes.forEach(u -> System.out.println(u));
-        /** o println sera chamado para cada elemento do conjunto utente para ser exibido*/
+        for (int i = 0; i < utentes.size(); i++) {
+        System.out.println(utentes.get(i));
+        }
         }
