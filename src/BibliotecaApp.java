@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -474,7 +475,10 @@ public class BibliotecaApp {
                         finalizarEmprestimo();
                     }
                     break;
-                case 0:
+                case 4:
+                    pesquisarEmprestimo();
+                    break;
+                    case 0:
                     break;
                 default:
                     System.out.println("Opção inválida");
@@ -577,6 +581,43 @@ public class BibliotecaApp {
             System.out.println("Número inválido");
         }
     }
+    public static void pesquisarEmprestimo() {
+        Scanner scanner = new Scanner(System.in);
+
+
+        // Solicitar o NIF do usuárioSystem.out.print("Digite o NIF do utente: ");
+        String nif = scanner.nextLine();
+
+        // Solicitar a data de início e fim para o intervalo de pesquisa
+        System.out.print("Digite a data de início (dd/MM/yyyy): ");
+        String[] dataInicioInput = scanner.nextLine().split("/");
+        Date dataInicio = new Date(Integer.parseInt(dataInicioInput[2]) - 1900, Integer.parseInt(dataInicioInput[1]) - 1, Integer.parseInt(dataInicioInput[0]));
+
+        System.out.print("Digite a data de fim (dd/MM/yyyy): ");
+        String[] dataFimInput = scanner.nextLine().split("/");
+        Date dataFim = new Date(Integer.parseInt(dataFimInput[2]) - 1900, Integer.parseInt(dataFimInput[1]) - 1, Integer.parseInt(dataFimInput[0]));
+
+        // Filtrar empréstimos associados ao NIF e dentro do intervalo de datas
+        List<Emprestimo> emprestimosDoUtente = new ArrayList<>();
+        for (Emprestimo emprestimo : emprestimosDoUtente) {
+            if (emprestimo.utente.nif.equals(nif) &&
+                    !emprestimo.dataEmprestimo.before(dataInicio) && !emprestimo.dataEmprestimo.after(dataFim)) {
+                emprestimosDoUtente.add(emprestimo);
+            }
+        }
+
+        // Verificar se existem empréstimos e exibir o resultado
+        if (emprestimosDoUtente.isEmpty()) {
+            System.out.println("O utente não possui empréstimos no intervalo especificado.");
+        } else {
+            System.out.println("O utente possui os seguintes empréstimos no intervalo de tempo especificado:");
+            for (Emprestimo emprestimo : emprestimosDoUtente) {
+                System.out.println(emprestimo);
+            }
+        }
+
+        scanner.close();
+    }
 
 
     // Métodos para reservas
@@ -587,6 +628,8 @@ public class BibliotecaApp {
             System.out.println("1. Registar Reserva");
             System.out.println("2. Listar Reservas");
             System.out.println("3. Transformar Reserva em Empréstimo");
+            System.out.println("4-Eliminar Reserva");
+            System.out.println();
             System.out.println("0. Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -601,6 +644,9 @@ public class BibliotecaApp {
                     break;
                 case 3:
                     transformarReserva();
+                    break;
+                case 4:
+                    retirarReserva();
                     break;
                 case 0:
                     break;
@@ -715,4 +761,26 @@ public class BibliotecaApp {
         }
     }
 
-}
+    public static void retirarReserva() {
+
+        System.out.println("Reservas antes da remoção:");
+            System.out.println(Utente.getReservas());
+
+            // Remover uma reserva com ID fornecido pelo usuário
+            System.out.println("Digite o numero do livro que pretende remover");
+            Scanner scanner=new Scanner(System.in);
+            int numeroReserva=scanner.nextInt();
+            boolean foiRemovido= Utente.retirarReserva(numeroReserva);
+
+            if (foiRemovido) {
+                System.out.println("Reserva com ID " + numeroReserva + " removida com sucesso!");
+            } else {
+                System.out.println("Reserva com ID " + numeroReserva + " não encontrada.");
+            }
+
+            System.out.println("Reservas após a remoção:");
+            System.out.println(Utente.getReservas());
+        }
+    }
+
+

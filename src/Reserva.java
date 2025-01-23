@@ -19,6 +19,7 @@ public class Reserva {
         this.livros = livros;
     }
 
+
     public Emprestimo transformarEmEmprestimo(Date dataEmprestimo, Date dataPrevistaDevolucao) {
         return new Emprestimo(numero, dataEmprestimo, dataPrevistaDevolucao, utente, livros);
     }
