@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-public class EmprestimoGestao {
+public class ApresentarTempoMedioEmprestimos {
 
     /** apresentar o tempo médio dos empréstimos no intervalo*/
     public static void apresentarTempoMedioEmprestimos(List<Emprestimo> emprestimos, LocalDate dataInicio, LocalDate dataFim) {

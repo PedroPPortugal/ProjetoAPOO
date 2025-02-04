@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -242,5 +243,12 @@ public class Reserva {
     // Método para obter todas as reservas
     public static ArrayList<Reserva> getReservas() {
         return reservas;
+    }
+
+    public Instant getDataReserva() {
+        return null;
+    }
+
+    public String getItem() {
     }
 }

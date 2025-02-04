@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.Instant;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -211,5 +213,14 @@ public class Emprestimo {
     // Método para obter todos os empréstimos
     public static ArrayList<Emprestimo> getEmprestimos() {
         return emprestimos;
+    }
+
+    public Instant getDataEmprestimo() {
+    }
+
+    public String getItem() {
+    }
+
+    public Temporal getDataDevolucao() {
     }
 }

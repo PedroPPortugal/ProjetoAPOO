@@ -2,9 +2,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmprestimoGestao {
+public class ItemMaisRequisitado {
 
-    /** Apresentar o item mais requisitado durante o intervalo de datas */
+    /**
+     * Apresentar o item mais requisitado durante o intervalo de datas
+     */
     public static void apresentarItemMaisRequisitado(List<Emprestimo> emprestimos, List<Reserva> reservas, LocalDate dataInicio, LocalDate dataFim) {
         List<String> itens = new ArrayList<>();
         List<Integer> contagens = new ArrayList<>();
@@ -73,3 +75,4 @@ public class EmprestimoGestao {
             System.out.println("Não houve requisições ou reservas no intervalo.");
         }
     }
+}
